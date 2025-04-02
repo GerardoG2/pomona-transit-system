@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 public class App {
     public static void main(String[] args) {
@@ -16,19 +19,30 @@ public class App {
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("✅ Connected to the database!");
 
-            TripOfferingDAOImpl tripOffer = new TripOfferingDAOImpl(conn);
-            tripOffer.disp_trip_offering_schedule(); 
-            Scanner scnr = new Scanner(System.in);
-            System.out.println("Enter the trip number to delete");
-            System.out.println("Enter the date to delete");
-            System.out.println("Enter the time to delete");
-            int tripNumToDelete = scnr.nextInt();
-            String dateToDelete = scnr.next();
-            String timeToDelete = scnr.next();
-            
+            TripOfferingDAOImpl tripOfferDAO = new TripOfferingDAOImpl(conn);
+            tripOfferDAO.disp_trip_offering_schedule(); 
+            // Scanner scnr = new Scanner(System.in);
+            // System.out.println("Enter the trip number to delete");
+            // System.out.println("Enter the date to delete");
+            // System.out.println("Enter the time to delete");
+            // int tripNumToDelete = scnr.nextInt();
+            // String dateToDelete = scnr.next();
+            // String timeToDelete = scnr.next();
+
+            int tripNumber = 2004;
+            String date = "2025-04-10";
+            String scheduledStartTime = "10:56:00";
+            String scheduledArrivalTime = "11:30:00";
+            String driverId = "Driver 8";
+            String busId = "BUS009";
+
+            TripOffering TripOfferingAddition = new TripOffering(tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+            tripOfferDAO.addTripOffering(TripOfferingAddition);
+
+            tripOfferDAO.disp_trip_offering_schedule();
 
 
-            tripOffer.deleteTripOffering(tripNumToDelete, dateToDelete, timeToDelete);
+            // tripOffer.deleteTripOffering(tripNumToDelete, dateToDelete, timeToDelete);
 
 
 

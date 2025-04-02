@@ -11,6 +11,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.core.SqlCommand;
+
 import com.pomonatransit.TripOffering;
 
 public class TripOfferingDAOImpl implements TripOfferingDAO{
@@ -26,7 +28,7 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             PreparedStatement ps = conn.prepareStatement("select * from trip_offering");
             ResultSet rs = ps.executeQuery();
 
-            System.out.printf("%-8s %-12s %-12s %-12s %-10s %-8s\n",
+            System.out.printf("\n%-8s %-12s %-12s %-12s %-10s %-8s\n",
             "Trip #", "Date", "Start Time", "Arrival Time", "Driver", "Bus");
             System.out.println("-------------------------------------------------------------");
             while(rs.next()){
@@ -60,8 +62,14 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             ps.setTime(3, Time.valueOf(scheduledStartTime));
 
             int rows_affected = ps.executeUpdate();
-            System.out.println("\nUpdated Schedule:\n");
-            disp_trip_offering_schedule();
+
+            if (rows_affected >= 1){
+                System.out.println("\nUpdated Schedule:\n");
+                disp_trip_offering_schedule();
+            } else {
+                System.out.println("Trip offering not found.");
+            }
+
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -69,6 +77,31 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
     @Override
     public void addTripOffering (TripOffering tripOffering){
+        int tripNumber = tripOffering.getTripNumber();
+        LocalDate date = tripOffering.getDate();
+        LocalTime scheduledStartTime = tripOffering.getScheduledStartTime();
+        LocalTime scheduledArrivalTime = tripOffering.getScheduledArrivalTime();
+        String driverId = tripOffering.getDriverId();
+        String busId = tripOffering.getBusId();
+        try{
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO trip_offering (trip_number, date, scheduled_start_time, scheduled_arrival_time, driver_id, bus_id)" +
+            " VALUES(?, ?, ?, ?, ?,?)");
+            ps.setInt(1,tripNumber);
+            ps.setDate(2, Date.valueOf(date));
+            ps.setTime(3, Time.valueOf(scheduledStartTime));
+            ps.setTime(4, Time.valueOf(scheduledArrivalTime));
+            ps.setString(5,driverId);
+            ps.setString(6,busId);
+            ps.execute();
+
+            System.out.println("Trip offering successfully added!");
+        } catch (SQLException e){
+            if (e.getSQLState().equals("23503")) {
+                System.out.println("Foreign key violation.");
+            } else {
+                e.printStackTrace();
+            }
+        }
 
     }
 

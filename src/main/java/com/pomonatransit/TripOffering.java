@@ -11,12 +11,12 @@ public class TripOffering {
     private String driverId;
     private String busId;
 
-    public TripOffering(int tripNumber, LocalDate date, LocalTime scheduledStartTime,
-    LocalTime scheduledArrivalTime, String driverId, String busId){
+    public TripOffering(int tripNumber, String date, String scheduledStartTime,
+    String scheduledArrivalTime, String driverId, String busId){
         this.tripNumber = tripNumber;
-        this.date = date;
-        this.scheduledStartTime = scheduledStartTime;
-        this.scheduledArrivalTime = scheduledArrivalTime;
+        this.date = LocalDate.parse(date);
+        this.scheduledStartTime = LocalTime.parse(scheduledStartTime);
+        this.scheduledArrivalTime = LocalTime.parse(scheduledArrivalTime);
         this.driverId = driverId;
         this.busId = busId;
     }
