@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
@@ -17,6 +18,17 @@ public class App {
 
             TripOfferingDAOImpl tripOffer = new TripOfferingDAOImpl(conn);
             tripOffer.disp_trip_offering_schedule(); 
+            Scanner scnr = new Scanner(System.in);
+            System.out.println("Enter the trip number to delete");
+            System.out.println("Enter the date to delete");
+            System.out.println("Enter the time to delete");
+            int tripNumToDelete = scnr.nextInt();
+            String dateToDelete = scnr.next();
+            String timeToDelete = scnr.next();
+            
+
+
+            tripOffer.deleteTripOffering(tripNumToDelete, dateToDelete, timeToDelete);
 
 
 

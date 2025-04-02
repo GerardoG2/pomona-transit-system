@@ -7,7 +7,7 @@ import java.util.List;
 import com.pomonatransit.TripOffering;
 
 public interface TripOfferingDAO{
-    void deleteTripOffering(int tripNumber, LocalDate date, LocalTime scheduledStartTime);
+    void deleteTripOffering(int tripNumber, String dateStr, String scheduledStartTimeStr);
     void addTripOffering (TripOffering tripOffering);
     void updateDriver(int tripNumber, LocalDate date, LocalTime scheduledStartTime, String newDrivername, String newDriverID);
     void updateBus(int tripNumber, LocalDate date, LocalTime scheduledStartTime, String newBusID);

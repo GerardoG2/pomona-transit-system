@@ -49,8 +49,22 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         }
         }
     @Override
-    public void deleteTripOffering(int tripNumber, LocalDate date, LocalTime scheduledStartTime){
+    public void deleteTripOffering(int tripNumber, String dateStr, String scheduledStartTimeStr){
+        try{
+            LocalDate date = LocalDate.parse(dateStr);
+            LocalTime scheduledStartTime = LocalTime.parse(scheduledStartTimeStr);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM trip_offering WHERE"+
+            " trip_number = ? AND date = ? AND scheduled_start_time = ?");
+            ps.setInt(1, tripNumber);
+            ps.setDate(2, Date.valueOf(date));
+            ps.setTime(3, Time.valueOf(scheduledStartTime));
 
+            int rows_affected = ps.executeUpdate();
+            System.out.println("\nUpdated Schedule:\n");
+            disp_trip_offering_schedule();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
