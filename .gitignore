@@ -1,0 +1,14 @@
+# Mac system files
+.DS_Store
+
+# Maven build output
+/target
+
+# Java class files
+*.class
+
+# VS Code settings (optional)
+.vscode/
+
+# Logs and temp files
+*.log

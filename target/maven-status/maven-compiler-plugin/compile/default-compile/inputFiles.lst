@@ -1,1 +1,12 @@
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/ActualTripStopInfo.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/ActualTripStopInfoDAO.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/ActualTripStopInfoDAOImpl.java
 /Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/App.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/Bus.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/Driver.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripOffering.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripOfferingDAO.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripOfferingDAOImpl.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripStopInfo.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripStopInfoDAO.java
+/Users/gerardogutierrez/Desktop/Academics/Spring_2025/CS_4350_Database/Assignments/Labs/Lab4/pomona-transit/src/main/java/com/pomonatransit/TripStopInfoDAOImpl.java

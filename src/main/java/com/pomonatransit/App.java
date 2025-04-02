@@ -15,17 +15,18 @@ public class App {
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("✅ Connected to the database!");
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM trip");
+            TripOfferingDAOImpl tripOffer = new TripOfferingDAOImpl(conn);
+            tripOffer.disp_trip_offering_schedule(); 
 
-            while (rs.next()) {
-                System.out.println("Trip #: " + rs.getInt("trip_number"));
-            }
+
+
 
         } catch (SQLException e) {
             System.out.println("❌ Connection failed.");
             e.printStackTrace();
         }
     }
+
+
 }
 
