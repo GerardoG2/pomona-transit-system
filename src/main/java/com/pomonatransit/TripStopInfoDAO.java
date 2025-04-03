@@ -1,5 +1,7 @@
 package com.pomonatransit;
 
-public class TripStopInfoDAO {
+public interface TripStopInfoDAO {
+
+    void dispTripStops(int tripNumber);
     
 }
