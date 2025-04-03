@@ -1,15 +1,11 @@
 package com.pomonatransit;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-
-import com.pomonatransit.TripOffering;
+import java.util.Scanner;
 
 public interface TripOfferingDAO{
     void dispTripOfferingSchedule();
-    void deleteTripOffering();
-    void addTripOffering();
-    void updateDriver();
-    void updateBus();
+    void deleteTripOffering(Scanner scnr);
+    void addTripOffering(Scanner scnr);
+    void updateDriver(Scanner scnr);
+    void updateBus(Scanner scnr);
 }

@@ -21,7 +21,7 @@ public class Menu {
             while (!userInput.equals("0")){
                 printMenuOptions();
                 userInput = scnr.nextLine();
-                menuSelection(conn, userInput);
+                menuSelection(conn,scnr, userInput);
             }
             System.out.println("Session Ended.");
 
@@ -62,7 +62,7 @@ public class Menu {
     /** Helper method for menu().
      * Executes database access method based off user input.
      */
-    public static void menuSelection(Connection conn,String selection){
+    public static void menuSelection(Connection conn, Scanner scnr, String selection){
         TripOfferingDAO tripOfferingDAO;
         TripStopInfoDAO tripStopInfoDAO;
         ActualTripStopInfoDAO actualTripStopInfoDAO;
@@ -73,35 +73,35 @@ public class Menu {
                 break;
             case "2":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
-                tripOfferingDAO.deleteTripOffering();
+                tripOfferingDAO.deleteTripOffering(scnr);
                 break;
             case "3":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
-                tripOfferingDAO.addTripOffering();
+                tripOfferingDAO.addTripOffering(scnr);
                 break;
             case "4":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
-                tripOfferingDAO.updateDriver();
+                tripOfferingDAO.updateDriver(scnr);
                 break;
             case "5":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
-                tripOfferingDAO.updateBus();
+                tripOfferingDAO.updateBus(scnr);
                 break;
             case "6":
                 tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
-                tripStopInfoDAO.dispTripStops();
+                tripStopInfoDAO.dispTripStops(scnr);
                 break;
             case "7":
-                Driver.dispDriverSchedule(conn);
+                Driver.dispDriverSchedule(conn, scnr);
                 break;
             case "8":
-                Driver.addDriver(conn);
+                Driver.addDriver(conn, scnr);
                 break;
             case "9":
-                Bus.addBus(conn);
+                Bus.addBus(conn, scnr);
                 break;
             case "10":
-                Bus.deleteBus(conn);
+                Bus.deleteBus(conn, scnr);
                 break;
             case "11":
                 actualTripStopInfoDAO = new ActualTripStopInfoDAOImpl(conn);

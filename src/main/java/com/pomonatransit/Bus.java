@@ -24,15 +24,14 @@ public class Bus {
     }
 
 
-     public static void addBus(Connection conn){
-        Scanner scnr = new Scanner(System.in);
+     public static void addBus(Connection conn, Scanner scnr){
         System.out.println("Enter the bus ID of the bus you would like to add: ");
         String busId = scnr.nextLine();
         System.out.println("Enter the model of the bus you would like to add: ");
         String model = scnr.nextLine();
         System.out.println("Enter the year(YYYY) of the bus you would like to add: ");
         int year = scnr.nextInt();
-        scnr.close();
+        scnr.nextLine();
 
         Bus bus = new Bus(busId, model, year);
         bus.setDBConnection(conn);
@@ -57,12 +56,10 @@ public class Bus {
 
     }
 
-    public static void deleteBus(Connection conn){
-        Scanner scnr = new Scanner(System.in);
+    public static void deleteBus(Connection conn, Scanner scnr){
         System.out.println("Enter the bus ID for the bus you would like to delete:");
         String busId = scnr.nextLine();
-        scnr.close();
-
+        
         deleteBus(conn, busId);
     }
 

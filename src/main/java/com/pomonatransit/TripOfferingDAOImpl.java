@@ -47,15 +47,14 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         }
 
     @Override
-    public void deleteTripOffering(){
-        Scanner scnr = new Scanner(System.in);
+    public void deleteTripOffering(Scanner scnr){
         System.out.println("Enter the trip number of the trip offering you would like to delete: ");
         int tripNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Enter the date of the trip offering you would like to delete:  ");
         String date = scnr.nextLine();
         System.out.println("Enter the time(hh:mm:ss) of the trip offering you would like to delete:  ");
         String scheduledStartTime = scnr.nextLine();
-        scnr.close();
         deleteTripOffering(tripNumber, date, scheduledStartTime);
 
     }
@@ -86,11 +85,11 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void addTripOffering(){
-        Scanner scnr = new Scanner(System.in);
+    public void addTripOffering(Scanner scnr){
         System.out.println("Enter the following details of the new trip offering.\n");
         System.out.println("Trip Number: ");
         int tripNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Date: ");
         String date = scnr.nextLine();
         System.out.println("Scheduled Start Time: ");
@@ -101,7 +100,6 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         String driverId = scnr.nextLine();
         System.out.println("Bus ID: ");
         String busId = scnr.nextLine();
-        scnr.close();
 
         TripOffering tripOffering = new TripOffering(tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
         addTripOffering(tripOffering);
@@ -140,17 +138,16 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateDriver(){
-        Scanner scnr = new Scanner(System.in);
+    public void updateDriver(Scanner scnr){
         System.out.println("Enter the trip number of the trip offering you would like modify: ");
         int tripNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Enter the date of the trip offering you would like modify: ");
         String date = scnr.nextLine();
         System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Enter the Driver ID of the new driver for this trip offering: ");
         String driverId = scnr.nextLine();
-        scnr.close();
 
         updateDriver(tripNumber, date, scheduledStartTime, driverId);
     }
@@ -178,18 +175,17 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateBus(){
-        Scanner scnr = new Scanner(System.in);
+    public void updateBus(Scanner scnr){
         System.out.println("Enter the trip number of the trip offering you would like modify: ");
         int tripNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Enter the date of the trip offering you would like modify: ");
         String date = scnr.nextLine();
         System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Enter the Bus ID of the new bus for this trip offering: ");
         String busId = scnr.nextLine();
-        scnr.close();
-
+        
         updateBus(tripNumber, date, scheduledStartTime, busId);
     }
 

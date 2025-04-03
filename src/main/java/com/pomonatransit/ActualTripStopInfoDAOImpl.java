@@ -43,26 +43,28 @@ public class ActualTripStopInfoDAOImpl implements ActualTripStopInfoDAO{
     }
 
     @Override
-    public void insertActualTripStopInfo(){
-        Scanner scnr = new Scanner(System.in);
+    public void insertActualTripStopInfo(Scanner scnr){
         System.out.println("Enter the following details of the actual trip stop info you would like to insert.\n");
         System.out.println("Trip Number: ");
         int tripNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Date (YYYY-MM-DD): ");
         String date = scnr.nextLine();
         System.out.println("Scheduled Start Time (hh:mm:ss): ");
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Stop Number: ");
         int stopNumber = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Scheduled Arrival Time (hh:mm:ss): ");
         String scheduledArrivalTime = scnr.nextLine();
         System.out.println("Actual Start Time (hh:mm:ss): ");
         String actualStartTime = scnr.nextLine();
         System.out.println("Number of Passengers In: ");
         int numberOfPassengersIn = scnr.nextInt();
+        scnr.nextLine();
         System.out.println("Number of Passengers Out: ");
         int numberOfPassengersOut = scnr.nextInt();
-        scnr.close();
+        scnr.nextLine();
 
         ActualTripStopInfo actualTripStopInfo = new ActualTripStopInfo(tripNumber, date, scheduledStartTime, stopNumber, scheduledArrivalTime, actualStartTime, numberOfPassengersIn, numberOfPassengersOut);
         insertActualTripStopInfo(actualTripStopInfo);

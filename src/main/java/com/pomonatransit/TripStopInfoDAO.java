@@ -1,7 +1,9 @@
 package com.pomonatransit;
 
+import java.util.Scanner;
+
 public interface TripStopInfoDAO {
 
-    void dispTripStops();
+    void dispTripStops(Scanner scnr);
     
 }

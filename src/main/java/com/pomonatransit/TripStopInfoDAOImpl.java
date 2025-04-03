@@ -15,11 +15,10 @@ public class TripStopInfoDAOImpl implements TripStopInfoDAO{
     }
 
     @Override
-    public void dispTripStops(){
-        Scanner scnr = new Scanner(System.in);
+    public void dispTripStops(Scanner scnr){
         System.out.println("Enter a trip number for the trip stop details: ");
         int tripNumber = scnr.nextInt();
-        scnr.close();
+        scnr.nextLine();
 
         dispTripStops(tripNumber);
     }

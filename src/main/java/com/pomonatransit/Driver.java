@@ -24,15 +24,13 @@ public class Driver {
         setDriverPhone(driverPHONE);
     }
 
-    public static void addDriver(Connection conn){
-        Scanner scnr = new Scanner(System.in);
+    public static void addDriver(Connection conn, Scanner scnr){
         System.out.println("Enter the driver ID of the driver you would like to add: ");
         String driverId = scnr.nextLine();
         System.out.println("Enter the name of the driver you would like to add: ");
         String driverName = scnr.nextLine();
         System.out.println("Enter the phone number[(###)###-####] of the driver you would like to add: ");
         String driverPhone = scnr.nextLine();
-        scnr.close();
 
         Driver driver = new Driver(driverId, driverName, driverPhone);
         driver.setDBConnection(conn);
@@ -104,15 +102,13 @@ public class Driver {
         }
     }
 
-        public static void dispDriverSchedule(Connection conn){
-            Scanner scnr = new Scanner(System.in);
+        public static void dispDriverSchedule(Connection conn, Scanner scnr){
             System.out.println("Enter the driver ID for the driver's schedule you would like to view: ");
             String driverId = scnr.nextLine();
             System.out.println("Enter the start date for the schedule you would like to view: ");
             String startDate = scnr.nextLine();
             System.out.println("Enter the end date for the schedule you would like to view: ");
             String endDate = scnr.nextLine();
-            scnr.close();
 
             dispDriverSchedule(conn, driverId, startDate, endDate);
         }
