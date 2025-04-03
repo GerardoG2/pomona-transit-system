@@ -110,9 +110,25 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDrivername, String newDriverID, String newDriverPhone){
-        // PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
-        // "SET driver_id =  ")
+    public void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID){
+        try{
+            PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
+            "SET driver_id = ? WHERE trip_number = ? AND date = ? AND scheduled_start_time = ?");
+            ps.setString(1, newDriverID);
+            ps.setInt(2, tripNumber);
+            ps.setDate(3, Date.valueOf(date));
+            ps.setTime(4, Time.valueOf(scheduledStartTime));
+
+            ps.execute();
+
+            System.out.println("Successfully updated the driver for trip offfering!");
+        } catch (SQLException e){
+            if (e.getSQLState().equals("23503")) {
+                System.out.println("Foreign key violation.");
+            } else {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

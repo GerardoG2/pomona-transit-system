@@ -9,8 +9,6 @@ public class TripOffering {
     private LocalTime scheduledStartTime;
     private LocalTime scheduledArrivalTime;
     private String driverId;
-    private String driverName;
-    private String driverPhone;
     private String busId;
 
     public TripOffering(int tripNumber, String date, String scheduledStartTime,
@@ -37,12 +35,6 @@ public class TripOffering {
 
     public String getDriverId() { return driverId; }
     public void setDriverId(String driverId) { this.driverId = driverId; }
-
-    public String getDriverName() { return driverName; }
-    public void setDriverName(String driverName) { this.driverName = driverName; }
-
-    public String getDriverPhone() { return driverPhone; }
-    public void setDriverPhone(String driverPhone) { this.driverPhone = driverPhone; }
 
     public String getBusId() { return busId; }
     public void setBusId(String busId) { this.busId = busId; }
