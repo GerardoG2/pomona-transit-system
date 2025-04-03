@@ -3,6 +3,7 @@ package com.pomonatransit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.sql.ResultSet;
 
 public class Bus {
@@ -22,7 +23,23 @@ public class Bus {
         setYear(year);
     }
 
-    public void addNewBus(Bus bus){
+
+     public static void addBus(Connection conn){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the bus ID of the bus you would like to add: ");
+        String busId = scnr.nextLine();
+        System.out.println("Enter the model of the bus you would like to add: ");
+        String model = scnr.nextLine();
+        System.out.println("Enter the year(YYYY) of the bus you would like to add: ");
+        int year = scnr.nextInt();
+        scnr.close();
+
+        Bus bus = new Bus(busId, model, year);
+        bus.setDBConnection(conn);
+        bus.addBus(bus);
+
+    }   
+    private void addBus(Bus bus){
         String newBusId = bus.getBusId();
         String newBusModel = bus.getModel();
         int newBusYear = bus.getYear();
@@ -40,7 +57,16 @@ public class Bus {
 
     }
 
-    public void deleteBus(String busID){
+    public static void deleteBus(Connection conn){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the bus ID for the bus you would like to delete:");
+        String busId = scnr.nextLine();
+        scnr.close();
+
+        deleteBus(conn, busId);
+    }
+
+    private static void deleteBus(Connection conn, String busID){
         try{
             PreparedStatement ps = conn.prepareStatement("DELETE FROM bus WHERE bus_id =?");
             ps.setString(1,busID);

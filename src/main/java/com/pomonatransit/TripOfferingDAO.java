@@ -12,5 +12,4 @@ public interface TripOfferingDAO{
     void addTripOffering();
     void updateDriver();
     void updateBus();
-    void dispDriverSchedule(String driverId, String startDateStr, String endDateStr);
 }

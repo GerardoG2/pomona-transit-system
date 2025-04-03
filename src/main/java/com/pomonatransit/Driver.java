@@ -1,8 +1,10 @@
 package com.pomonatransit;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.sql.ResultSet;
 
 public class Driver {
@@ -22,7 +24,22 @@ public class Driver {
         setDriverPhone(driverPHONE);
     }
 
-    public void addNewDriver(Driver driver){
+    public static void addDriver(Connection conn){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the driver ID of the driver you would like to add: ");
+        String driverId = scnr.nextLine();
+        System.out.println("Enter the name of the driver you would like to add: ");
+        String driverName = scnr.nextLine();
+        System.out.println("Enter the phone number[(###)###-####] of the driver you would like to add: ");
+        String driverPhone = scnr.nextLine();
+        scnr.close();
+
+        Driver driver = new Driver(driverId, driverName, driverPhone);
+        driver.setDBConnection(conn);
+        driver.addDriver(driver);
+
+    }
+    private void addDriver(Driver driver){
         String newDriverId = driver.getDriverId();
         String newDriverName = driver.getDriverName();
         String newDriverPhone = driver.getDriverPhone();
@@ -86,6 +103,50 @@ public class Driver {
             e.printStackTrace();
         }
     }
+
+        public static void dispDriverSchedule(Connection conn){
+            Scanner scnr = new Scanner(System.in);
+            System.out.println("Enter the driver ID for the driver's schedule you would like to view: ");
+            String driverId = scnr.nextLine();
+            System.out.println("Enter the start date for the schedule you would like to view: ");
+            String startDate = scnr.nextLine();
+            System.out.println("Enter the end date for the schedule you would like to view: ");
+            String endDate = scnr.nextLine();
+            scnr.close();
+
+            dispDriverSchedule(conn, driverId, startDate, endDate);
+        }
+
+        private static void dispDriverSchedule(Connection conn, String driverId, String startDateStr, String endDateStr){
+        try{
+            Date startDate = Date.valueOf(startDateStr);
+            Date endDate = Date.valueOf(endDateStr);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM trip_offering WHERE driver_id = ? AND date >= ? AND date <= ?");
+            ps.setString(1, driverId);
+            ps.setDate(2, startDate);
+            ps.setDate(3, endDate);
+            
+            ResultSet rs = ps.executeQuery();
+            System.out.printf("\n%-8s %-12s %-12s %-12s %-10s %-8s\n",
+            "Trip #", "Date", "Start Time", "Arrival Time", "Driver", "Bus");
+            System.out.println("-------------------------------------------------------------");
+            while(rs.next()){
+                int tripNumber = rs.getInt("trip_number");
+                String date = rs.getString("date");
+                String scheduledStartTime = rs.getString("scheduled_start_time");
+                String scheduledArrivalTime = rs.getString("scheduled_arrival_time");
+                String busId = rs.getString("bus_id");
+
+                System.out.printf("%-8d %-12s %-12s %-12s %-10s %-8s\n",
+                tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+            
+
+    } 
 
     
 }

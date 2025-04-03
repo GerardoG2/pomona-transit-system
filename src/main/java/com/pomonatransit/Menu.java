@@ -65,6 +65,7 @@ public class Menu {
     public static void menuSelection(Connection conn,String selection){
         TripOfferingDAO tripOfferingDAO;
         TripStopInfoDAO tripStopInfoDAO;
+        ActualTripStopInfoDAO actualTripStopInfoDAO;
         switch(selection){
             case "1":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
@@ -81,18 +82,31 @@ public class Menu {
             case "4":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
                 tripOfferingDAO.updateDriver();
+                break;
             case "5":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
                 tripOfferingDAO.updateBus();
+                break;
             case "6":
                 tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
                 tripStopInfoDAO.dispTripStops();
+                break;
             case "7":
+                Driver.dispDriverSchedule(conn);
+                break;
             case "8":
+                Driver.addDriver(conn);
+                break;
             case "9":
+                Bus.addBus(conn);
+                break;
             case "10":
+                Bus.deleteBus(conn);
+                break;
             case "11":
-            case "0":
+                actualTripStopInfoDAO = new ActualTripStopInfoDAOImpl(conn);
+                actualTripStopInfoDAO.insertActualTripStopInfo();
+                break;
         }
     }
     
