@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Scanner;
 
 public class TripOfferingDAOImpl implements TripOfferingDAO{
@@ -16,6 +14,43 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
     public TripOfferingDAOImpl(Connection conn){
         this.conn = conn;
+    }
+
+    @Override
+    public void dispTripOffering(Scanner scnr){
+        System.out.println("Enter the start location name of your desired trip: ");
+        String startLocationName = scnr.nextLine();
+        System.out.println("Enter the destination name of your desired trip: ");
+        String destinationName = scnr.nextLine();
+
+        dispTripOffering(startLocationName, destinationName);
+    }
+    private void dispTripOffering(String startLocationName, String destinationName){
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+            "SELECT DISTINCT trip_offering.trip_number, date, scheduled_start_time, scheduled_arrival_time, driver_id, bus_id, start_location_name, destination_name "+
+            "FROM trip_offering INNER JOIN trip ON trip_offering.trip_number = trip.trip_number WHERE start_location_name = ? AND destination_name = ?");   
+            ps.setString(1, startLocationName );
+            ps.setString(2, destinationName );
+            ResultSet rs = ps.executeQuery();
+
+            System.out.printf("\n%-8s %-12s %-12s %-12s %-10s %-8s\n",
+            "Trip #", "Date", "Start Time", "Arrival Time", "Driver", "Bus");
+            System.out.println("-------------------------------------------------------------");
+            while(rs.next()){
+                int tripNumber = rs.getInt("trip_number");
+                String date = rs.getString("date");
+                String scheduledStartTime = rs.getString("scheduled_start_time");
+                String scheduledArrivalTime = rs.getString("scheduled_arrival_time");
+                String driverId = rs.getString("driver_id");
+                String busId = rs.getString("bus_id");
+
+                System.out.printf("%-8d %-12s %-12s %-12s %-10s %-8s\n",
+                tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     @Override
     public void dispTripOfferingSchedule(){
@@ -185,7 +220,7 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Enter the Bus ID of the new bus for this trip offering: ");
         String busId = scnr.nextLine();
-        
+
         updateBus(tripNumber, date, scheduledStartTime, busId);
     }
 
