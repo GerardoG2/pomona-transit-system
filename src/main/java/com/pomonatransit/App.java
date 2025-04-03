@@ -19,7 +19,7 @@ public class App {
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("✅ Connected to the database!");
 
-            // TripOfferingDAOImpl tripOfferDAO = new TripOfferingDAOImpl(conn);
+            TripOfferingDAOImpl tripOfferDAO = new TripOfferingDAOImpl(conn);
             // tripOfferDAO.disp_trip_offering_schedule(); 
             // Scanner scnr = new Scanner(System.in);
             // System.out.println("Enter the trip number to delete");
@@ -42,8 +42,12 @@ public class App {
 
             // tripOfferDAO.disp_trip_offering_schedule();
 
-            TripStopInfoDAO tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
-            tripStopInfoDAO.dispTripStops(2010);
+            // TripStopInfoDAO tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
+            // tripStopInfoDAO.dispTripStops(2010);
+            String driverid = "Driver 3";
+            String startDate = "2025-04-04";
+            String endDate = "2025-04-30";
+            tripOfferDAO.dispDriverSchedule(driverid, startDate, endDate);
 
             
 

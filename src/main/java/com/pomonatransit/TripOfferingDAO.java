@@ -11,5 +11,5 @@ public interface TripOfferingDAO{
     void addTripOffering (TripOffering tripOffering);
     void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID);
     void updateBus(int tripNumber, String date, String scheduledStartTime, String newBusID);
-    List<TripOffering> getTripSchedule (String startLocation, String destination, LocalDate date);
+    void dispDriverSchedule(String driverId, String startDateStr, String endDateStr);
 }

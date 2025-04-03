@@ -154,16 +154,43 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
     }
 
-    @Override
-    public List<TripOffering> getTripSchedule (String startLocation, String destination, LocalDate date){
-        List<TripOffering> schedule = new ArrayList<>();
-        
 
-        return schedule;
-    }
+    @Override
+    public void dispDriverSchedule(String driverId, String startDateStr, String endDateStr){
+        try{
+            Date startDate = Date.valueOf(startDateStr);
+            Date endDate = Date.valueOf(endDateStr);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM trip_offering WHERE driver_id = ? AND date >= ? AND date <= ?");
+            ps.setString(1, driverId);
+            ps.setDate(2, startDate);
+            ps.setDate(3, endDate);
+            
+            ResultSet rs = ps.executeQuery();
+            System.out.printf("\n%-8s %-12s %-12s %-12s %-10s %-8s\n",
+            "Trip #", "Date", "Start Time", "Arrival Time", "Driver", "Bus");
+            System.out.println("-------------------------------------------------------------");
+            while(rs.next()){
+                int tripNumber = rs.getInt("trip_number");
+                String date = rs.getString("date");
+                String scheduledStartTime = rs.getString("scheduled_start_time");
+                String scheduledArrivalTime = rs.getString("scheduled_arrival_time");
+                String busId = rs.getString("bus_id");
+
+                System.out.printf("%-8d %-12s %-12s %-12s %-10s %-8s\n",
+                tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+            
+
+    } 
+}
+
 
     
 
-}
+
 
 
