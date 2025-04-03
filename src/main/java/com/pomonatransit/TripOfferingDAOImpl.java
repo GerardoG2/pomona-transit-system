@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.postgresql.core.SqlCommand;
 
@@ -95,6 +96,9 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             ps.execute();
 
             System.out.println("Trip offering successfully added!");
+            // System.out.println("Would you like to add more trip offerings? Enter yes or no.");
+            // does not need to be inside method 
+
         } catch (SQLException e){
             if (e.getSQLState().equals("23503")) {
                 System.out.println("Foreign key violation.");
@@ -106,8 +110,9 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateDriver(int tripNumber, LocalDate date, LocalTime scheduledStartTime, String newDrivername, String newDriverID){
-
+    public void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDrivername, String newDriverID, String newDriverPhone){
+        // PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
+        // "SET driver_id =  ")
     }
 
     @Override

@@ -29,12 +29,12 @@ public class App {
             // String dateToDelete = scnr.next();
             // String timeToDelete = scnr.next();
 
-            int tripNumber = 2004;
+            int tripNumber = 2005;
             String date = "2025-04-10";
             String scheduledStartTime = "10:56:00";
             String scheduledArrivalTime = "11:30:00";
-            String driverId = "Driver 8";
-            String busId = "BUS009";
+            String driverId = "Driver 9";
+            String busId = "BUS002";
 
             TripOffering TripOfferingAddition = new TripOffering(tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
             tripOfferDAO.addTripOffering(TripOfferingAddition);
