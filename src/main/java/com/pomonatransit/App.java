@@ -57,15 +57,28 @@ public class App {
             // tripOffer.deleteTripOffering(tripNumToDelete, dateToDelete, timeToDelete);
 
 
-            Driver driver = new Driver(conn);
+            // Driver driver = new Driver(conn);
             // driver.setDBConnection(conn);
 
             // driver.deleteDriver("(909)222-3333");
             // driver.deleteDriver("(909)222-3334");
 
-            driver.dispDrivers();
+            // driver.dispDrivers();
             // driver.addNewDriver(driver);
             // driver.dispDrivers();
+
+            Bus bus = new Bus("Bus 999", "Model Z", 2025);
+            bus.setDBConnection(conn);
+
+            bus.dispBuses();
+
+            bus.addNewBus(bus);
+
+            bus.dispBuses();
+
+            bus.deleteBus("Bus 999");
+
+            bus.dispBuses();
 
 
 
