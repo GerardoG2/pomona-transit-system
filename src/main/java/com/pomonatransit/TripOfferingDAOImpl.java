@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 public class TripOfferingDAOImpl implements TripOfferingDAO{
     private Connection conn;
@@ -16,8 +17,8 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     public TripOfferingDAOImpl(Connection conn){
         this.conn = conn;
     }
-
-    public void disp_trip_offering_schedule(){
+    @Override
+    public void dispTripOfferingSchedule(){
         try {
             PreparedStatement ps = conn.prepareStatement("select * from trip_offering");
             ResultSet rs = ps.executeQuery();
@@ -44,22 +45,37 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             e.printStackTrace();
         }
         }
+
     @Override
-    public void deleteTripOffering(int tripNumber, String dateStr, String scheduledStartTimeStr){
+    public void deleteTripOffering(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the trip number of the trip offering you would like to delete: ");
+        int tripNumber = scnr.nextInt();
+        System.out.println("Enter the date of the trip offering you would like to delete:  ");
+        String date = scnr.nextLine();
+        System.out.println("Enter the time(hh:mm:ss) of the trip offering you would like to delete:  ");
+        String scheduledStartTime = scnr.nextLine();
+        scnr.close();
+        deleteTripOffering(tripNumber, date, scheduledStartTime);
+
+    }
+
+    
+    private void deleteTripOffering(int tripNumber, String dateStr, String scheduledStartTimeStr){
         try{
-            LocalDate date = LocalDate.parse(dateStr);
-            LocalTime scheduledStartTime = LocalTime.parse(scheduledStartTimeStr);
+            Date date = Date.valueOf(dateStr);
+            Time scheduledStartTime = Time.valueOf(scheduledStartTimeStr);
             PreparedStatement ps = conn.prepareStatement("DELETE FROM trip_offering WHERE"+
             " trip_number = ? AND date = ? AND scheduled_start_time = ?");
             ps.setInt(1, tripNumber);
-            ps.setDate(2, Date.valueOf(date));
-            ps.setTime(3, Time.valueOf(scheduledStartTime));
+            ps.setDate(2, date);
+            ps.setTime(3, scheduledStartTime);
 
             int rows_affected = ps.executeUpdate();
 
             if (rows_affected >= 1){
                 System.out.println("\nUpdated Schedule:\n");
-                disp_trip_offering_schedule();
+                dispTripOfferingSchedule();
             } else {
                 System.out.println("Trip offering not found.");
             }
@@ -70,20 +86,41 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void addTripOffering (TripOffering tripOffering){
+    public void addTripOffering(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the following details of the new trip offering.\n");
+        System.out.println("Trip Number: ");
+        int tripNumber = scnr.nextInt();
+        System.out.println("Date: ");
+        String date = scnr.nextLine();
+        System.out.println("Scheduled Start Time: ");
+        String scheduledStartTime = scnr.nextLine();
+        System.out.println("Scheduled Arrival Time: ");
+        String scheduledArrivalTime = scnr.nextLine();
+        System.out.println("Driver ID: ");
+        String driverId = scnr.nextLine();
+        System.out.println("Bus ID: ");
+        String busId = scnr.nextLine();
+        scnr.close();
+
+        TripOffering tripOffering = new TripOffering(tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+        addTripOffering(tripOffering);
+    }
+    
+    private void addTripOffering (TripOffering tripOffering){
         int tripNumber = tripOffering.getTripNumber();
-        LocalDate date = tripOffering.getDate();
-        LocalTime scheduledStartTime = tripOffering.getScheduledStartTime();
-        LocalTime scheduledArrivalTime = tripOffering.getScheduledArrivalTime();
+        Date date = Date.valueOf(tripOffering.getDate());
+        Time scheduledStartTime = Time.valueOf(tripOffering.getScheduledStartTime());
+        Time scheduledArrivalTime = Time.valueOf(tripOffering.getScheduledArrivalTime());
         String driverId = tripOffering.getDriverId();
         String busId = tripOffering.getBusId();
         try{
             PreparedStatement ps = conn.prepareStatement("INSERT INTO trip_offering (trip_number, date, scheduled_start_time, scheduled_arrival_time, driver_id, bus_id)" +
             " VALUES(?, ?, ?, ?, ?,?)");
             ps.setInt(1,tripNumber);
-            ps.setDate(2, Date.valueOf(date));
-            ps.setTime(3, Time.valueOf(scheduledStartTime));
-            ps.setTime(4, Time.valueOf(scheduledArrivalTime));
+            ps.setDate(2, date);
+            ps.setTime(3, scheduledStartTime);
+            ps.setTime(4, scheduledArrivalTime);
             ps.setString(5,driverId);
             ps.setString(6,busId);
             ps.execute();

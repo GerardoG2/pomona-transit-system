@@ -5,18 +5,18 @@ import java.time.LocalTime;
 
 public class TripOffering {
     private int tripNumber;
-    private LocalDate date;
-    private LocalTime scheduledStartTime;
-    private LocalTime scheduledArrivalTime;
+    private String date;
+    private String scheduledStartTime;
+    private String scheduledArrivalTime;
     private String driverId;
     private String busId;
 
     public TripOffering(int tripNumber, String date, String scheduledStartTime,
     String scheduledArrivalTime, String driverId, String busId){
         this.tripNumber = tripNumber;
-        this.date = LocalDate.parse(date);
-        this.scheduledStartTime = LocalTime.parse(scheduledStartTime);
-        this.scheduledArrivalTime = LocalTime.parse(scheduledArrivalTime);
+        this.date = date;
+        this.scheduledStartTime = scheduledStartTime;
+        this.scheduledArrivalTime = scheduledArrivalTime;
         this.driverId = driverId;
         this.busId = busId;
     }
@@ -24,14 +24,14 @@ public class TripOffering {
     public int getTripNumber() { return tripNumber; }
     public void setTripNumber(int tripNumber) { this.tripNumber = tripNumber; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 
-    public LocalTime getScheduledStartTime() { return scheduledStartTime; }
-    public void setScheduledStartTime(LocalTime scheduledStartTime) { this.scheduledStartTime = scheduledStartTime; }
+    public String getScheduledStartTime() { return scheduledStartTime; }
+    public void setScheduledStartTime(String scheduledStartTime) { this.scheduledStartTime = scheduledStartTime; }
 
-    public LocalTime getScheduledArrivalTime() { return scheduledArrivalTime; }
-    public void setScheduledArrivalTime(LocalTime scheduledArrivalTime) { this.scheduledArrivalTime = scheduledArrivalTime; }
+    public String getScheduledArrivalTime() { return scheduledArrivalTime; }
+    public void setScheduledArrivalTime(String scheduledArrivalTime) { this.scheduledArrivalTime = scheduledArrivalTime; }
 
     public String getDriverId() { return driverId; }
     public void setDriverId(String driverId) { this.driverId = driverId; }

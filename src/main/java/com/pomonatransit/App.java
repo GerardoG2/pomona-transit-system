@@ -3,11 +3,7 @@ package com.pomonatransit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 
 public class App {
@@ -105,6 +101,8 @@ public class App {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
