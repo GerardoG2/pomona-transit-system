@@ -34,9 +34,9 @@ public class App {
             String scheduledStartTime = "10:56:00";
             String scheduledArrivalTime = "11:30:00";
             String driverId = "Driver 3";
-            String busId = "BUS002";
+            String busId = "BUS001";
 
-            tripOfferDAO.updateDriver(tripNumber, date, scheduledStartTime, driverId);
+            tripOfferDAO.updateBus(tripNumber, date, scheduledStartTime, busId);
             // TripOffering TripOfferingAddition = new TripOffering(tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
             // tripOfferDAO.addTripOffering(TripOfferingAddition);
 
