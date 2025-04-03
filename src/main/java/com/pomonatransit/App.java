@@ -67,18 +67,36 @@ public class App {
             // driver.addNewDriver(driver);
             // driver.dispDrivers();
 
-            Bus bus = new Bus("Bus 999", "Model Z", 2025);
-            bus.setDBConnection(conn);
+            // Bus bus = new Bus("Bus 999", "Model Z", 2025);
+            // bus.setDBConnection(conn);
 
-            bus.dispBuses();
+            // bus.dispBuses();
 
-            bus.addNewBus(bus);
+            // bus.addNewBus(bus);
 
-            bus.dispBuses();
+            // bus.dispBuses();
 
-            bus.deleteBus("Bus 999");
+            // bus.deleteBus("Bus 999");
 
-            bus.dispBuses();
+            // bus.dispBuses();
+
+            int tripNumber = 2005;
+            String date = "2025-04-10";
+            String scheduledStartTime = "10:56:00";
+            int stopNumber = 5;
+            String scheduledArrivalTime = "11:30:00";
+            String actualStartTime = "11:00:00";
+            int numberOfPassengersIn = 26;
+            int numberOfPassengersOut = 16;
+
+            ActualTripStopInfo actualTripStopInfo = new ActualTripStopInfo(tripNumber, date, scheduledStartTime, stopNumber, scheduledArrivalTime, actualStartTime, numberOfPassengersIn, numberOfPassengersOut);
+
+            ActualTripStopInfoDAO actualTripStopInfoDAO = new ActualTripStopInfoDAOImpl(conn);
+
+            actualTripStopInfoDAO.dispActualTripStopInfo();
+            actualTripStopInfoDAO.insertActualTripStopInfo(actualTripStopInfo);
+            actualTripStopInfoDAO.dispActualTripStopInfo();
+
 
 
 
