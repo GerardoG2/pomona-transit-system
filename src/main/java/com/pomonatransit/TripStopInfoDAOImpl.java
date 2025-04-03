@@ -3,6 +3,7 @@ package com.pomonatransit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.sql.ResultSet;
 
 public class TripStopInfoDAOImpl implements TripStopInfoDAO{
@@ -14,7 +15,16 @@ public class TripStopInfoDAOImpl implements TripStopInfoDAO{
     }
 
     @Override
-    public void dispTripStops(int tripNumber){
+    public void dispTripStops(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter a trip number for the trip stop details: ");
+        int tripNumber = scnr.nextInt();
+        scnr.close();
+
+        dispTripStops(tripNumber);
+    }
+    
+    private void dispTripStops(int tripNumber){
         try{
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM trip_stop_info WHERE trip_number = ?");
             ps.setInt(1, tripNumber);

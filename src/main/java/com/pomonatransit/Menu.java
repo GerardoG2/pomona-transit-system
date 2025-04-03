@@ -64,6 +64,7 @@ public class Menu {
      */
     public static void menuSelection(Connection conn,String selection){
         TripOfferingDAO tripOfferingDAO;
+        TripStopInfoDAO tripStopInfoDAO;
         switch(selection){
             case "1":
                 tripOfferingDAO = new TripOfferingDAOImpl(conn);
@@ -78,9 +79,14 @@ public class Menu {
                 tripOfferingDAO.addTripOffering();
                 break;
             case "4":
-                
+                tripOfferingDAO = new TripOfferingDAOImpl(conn);
+                tripOfferingDAO.updateDriver();
             case "5":
+                tripOfferingDAO = new TripOfferingDAOImpl(conn);
+                tripOfferingDAO.updateBus();
             case "6":
+                tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
+                tripStopInfoDAO.dispTripStops();
             case "7":
             case "8":
             case "9":

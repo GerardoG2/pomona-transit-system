@@ -10,7 +10,7 @@ public interface TripOfferingDAO{
     void dispTripOfferingSchedule();
     void deleteTripOffering();
     void addTripOffering();
-    void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID);
-    void updateBus(int tripNumber, String date, String scheduledStartTime, String newBusID);
+    void updateDriver();
+    void updateBus();
     void dispDriverSchedule(String driverId, String startDateStr, String endDateStr);
 }

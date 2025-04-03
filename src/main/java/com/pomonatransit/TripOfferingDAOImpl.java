@@ -140,7 +140,23 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID){
+    public void updateDriver(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the trip number of the trip offering you would like modify: ");
+        int tripNumber = scnr.nextInt();
+        System.out.println("Enter the date of the trip offering you would like modify: ");
+        String date = scnr.nextLine();
+        System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
+        String scheduledStartTime = scnr.nextLine();
+        System.out.println("Enter the Driver ID of the new driver for this trip offering: ");
+        String driverId = scnr.nextLine();
+        scnr.close();
+
+        updateDriver(tripNumber, date, scheduledStartTime, driverId);
+    }
+
+    
+    private void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID){
         try{
             PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
             "SET driver_id = ? WHERE trip_number = ? AND date = ? AND scheduled_start_time = ?");
@@ -162,7 +178,23 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
     }
 
     @Override
-    public void updateBus(int tripNumber, String date, String scheduledStartTime, String newBusID){
+    public void updateBus(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter the trip number of the trip offering you would like modify: ");
+        int tripNumber = scnr.nextInt();
+        System.out.println("Enter the date of the trip offering you would like modify: ");
+        String date = scnr.nextLine();
+        System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
+        String scheduledStartTime = scnr.nextLine();
+        System.out.println("Enter the Bus ID of the new bus for this trip offering: ");
+        String busId = scnr.nextLine();
+        scnr.close();
+
+        updateBus(tripNumber, date, scheduledStartTime, busId);
+    }
+
+    
+    private void updateBus(int tripNumber, String date, String scheduledStartTime, String newBusID){
         try{
             PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
             "SET bus_id = ? WHERE trip_number = ? AND date = ? AND scheduled_start_time = ?");
