@@ -8,13 +8,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import org.postgresql.core.SqlCommand;
-
-import com.pomonatransit.TripOffering;
 
 public class TripOfferingDAOImpl implements TripOfferingDAO{
     private Connection conn;

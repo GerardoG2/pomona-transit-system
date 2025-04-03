@@ -44,16 +44,28 @@ public class App {
 
             // TripStopInfoDAO tripStopInfoDAO = new TripStopInfoDAOImpl(conn);
             // tripStopInfoDAO.dispTripStops(2010);
-            String driverid = "Driver 3";
-            String startDate = "2025-04-04";
-            String endDate = "2025-04-30";
-            tripOfferDAO.dispDriverSchedule(driverid, startDate, endDate);
+            // String driverid = "Driver 03";
+            // String startDate = "2025-04-04";
+            // String endDate = "2025-04-30";
+            // tripOfferDAO.dispDriverSchedule(driverid, startDate, endDate);
+
+            
 
             
 
 
             // tripOffer.deleteTripOffering(tripNumToDelete, dateToDelete, timeToDelete);
 
+
+            Driver driver = new Driver(conn);
+            // driver.setDBConnection(conn);
+
+            // driver.deleteDriver("(909)222-3333");
+            // driver.deleteDriver("(909)222-3334");
+
+            driver.dispDrivers();
+            // driver.addNewDriver(driver);
+            // driver.dispDrivers();
 
 
 
