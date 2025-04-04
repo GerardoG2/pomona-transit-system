@@ -25,7 +25,9 @@ public class TripStopInfoDAOImpl implements TripStopInfoDAO{
     
     private void dispTripStops(int tripNumber){
         try{
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM trip_stop_info WHERE trip_number = ?");
+            PreparedStatement ps = conn.prepareStatement(
+                "SELECT trip_number, t.stop_number, stop_address, sequence_number, driving_time FROM trip_stop_info t "+ 
+                "INNER JOIN stop s ON t.stop_number = s.stop_number WHERE trip_number = ?");
             ps.setInt(1, tripNumber);
             
             ResultSet rs = ps.executeQuery();

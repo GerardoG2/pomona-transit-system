@@ -159,8 +159,6 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             ps.execute();
 
             System.out.println("Trip offering successfully added!");
-            // System.out.println("Would you like to add more trip offerings? Enter yes or no.");
-            // does not need to be inside method 
 
         } catch (SQLException e){
             if (e.getSQLState().equals("23503")) {
