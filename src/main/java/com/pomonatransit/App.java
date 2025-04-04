@@ -11,8 +11,11 @@ public class App {
 
     System.out.print("Enter PostgreSQL password: ");
     String password = scnr.nextLine(); 
+    
+    System.out.println("Enter the name of your database: ");
+    String user_database = scnr.nextLine();
+    String jdbcUrl = "jdbc:postgresql://localhost:5432/" + user_database;
 
-    String jdbcUrl = "jdbc:postgresql://localhost:5432/pomona_transit";
     Menu.menu(jdbcUrl, user, password);
     }
 }
