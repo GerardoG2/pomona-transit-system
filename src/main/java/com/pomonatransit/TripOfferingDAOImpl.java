@@ -18,7 +18,7 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
     @Override
     public void dispTripOffering(Scanner scnr){
-        System.out.println("Enter the start location name of your desired trip: ");
+        System.out.println("\nEnter the start location name of your desired trip: ");
         String startLocationName = scnr.nextLine();
         System.out.println("Enter the destination name of your desired trip: ");
         String destinationName = scnr.nextLine();
@@ -29,25 +29,29 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         try {
             PreparedStatement ps = conn.prepareStatement(
             "SELECT DISTINCT trip_offering.trip_number, date, scheduled_start_time, scheduled_arrival_time, driver_id, bus_id, start_location_name, destination_name "+
-            "FROM trip_offering INNER JOIN trip ON trip_offering.trip_number = trip.trip_number WHERE start_location_name = ? AND destination_name = ?");   
+            "FROM trip_offering INNER JOIN trip ON trip_offering.trip_number = trip.trip_number WHERE start_location_name ILIKE ? AND destination_name ILIKE ?");   
             ps.setString(1, startLocationName );
             ps.setString(2, destinationName );
             ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                System.out.printf("\n%-8s %-12s %-40s %-40s %-12s %-12s %-10s %-8s\n",
+                "Trip #", "Date", "Start Location", "Destination", "Start Time", "Arrival Time", "Driver", "Bus");
+                System.out.println("-".repeat(150));
+                Boolean hasNextRow = true;
+                while(hasNextRow){
+                    int tripNumber = rs.getInt("trip_number");
+                    String date = rs.getString("date");
+                    String scheduledStartTime = rs.getString("scheduled_start_time");
+                    String scheduledArrivalTime = rs.getString("scheduled_arrival_time");
+                    String driverId = rs.getString("driver_id");
+                    String busId = rs.getString("bus_id");
+    
+                    System.out.printf("%-8d %-12s %-40s %-40s %-12s %-12s %-10s %-8s\n",
+                    tripNumber, date,startLocationName, destinationName, scheduledStartTime, scheduledArrivalTime, driverId, busId);
+                    hasNextRow = rs.next();
+                } 
+            } else { System.out.println("\nNo trip offerings found.");}
 
-            System.out.printf("\n%-8s %-12s %-12s %-12s %-10s %-8s\n",
-            "Trip #", "Date", "Start Time", "Arrival Time", "Driver", "Bus");
-            System.out.println("-------------------------------------------------------------");
-            while(rs.next()){
-                int tripNumber = rs.getInt("trip_number");
-                String date = rs.getString("date");
-                String scheduledStartTime = rs.getString("scheduled_start_time");
-                String scheduledArrivalTime = rs.getString("scheduled_arrival_time");
-                String driverId = rs.getString("driver_id");
-                String busId = rs.getString("bus_id");
-
-                System.out.printf("%-8d %-12s %-12s %-12s %-10s %-8s\n",
-                tripNumber, date, scheduledStartTime, scheduledArrivalTime, driverId, busId);
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -86,9 +90,9 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         System.out.println("Enter the trip number of the trip offering you would like to delete: ");
         int tripNumber = scnr.nextInt();
         scnr.nextLine();
-        System.out.println("Enter the date of the trip offering you would like to delete:  ");
+        System.out.println("Enter the date (YYYY:MM:DD) of the trip offering you would like to delete:  ");
         String date = scnr.nextLine();
-        System.out.println("Enter the time(hh:mm:ss) of the trip offering you would like to delete:  ");
+        System.out.println("Enter the time (hh:mm:ss) of the trip offering you would like to delete:  ");
         String scheduledStartTime = scnr.nextLine();
         deleteTripOffering(tripNumber, date, scheduledStartTime);
 
@@ -125,11 +129,11 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         System.out.println("Trip Number: ");
         int tripNumber = scnr.nextInt();
         scnr.nextLine();
-        System.out.println("Date: ");
+        System.out.println("Date (YYYY-MM-DD): ");
         String date = scnr.nextLine();
-        System.out.println("Scheduled Start Time: ");
+        System.out.println("Scheduled Start Time (hh:mm:ss): ");
         String scheduledStartTime = scnr.nextLine();
-        System.out.println("Scheduled Arrival Time: ");
+        System.out.println("Scheduled Arrival Time (hh:mm:ss): ");
         String scheduledArrivalTime = scnr.nextLine();
         System.out.println("Driver ID: ");
         String driverId = scnr.nextLine();
@@ -175,9 +179,9 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         System.out.println("Enter the trip number of the trip offering you would like modify: ");
         int tripNumber = scnr.nextInt();
         scnr.nextLine();
-        System.out.println("Enter the date of the trip offering you would like modify: ");
+        System.out.println("Enter the date (YYY-MM-DD)of the trip offering you would like modify: ");
         String date = scnr.nextLine();
-        System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
+        System.out.println("Enter the scheduled start time (hh:mm:ss) of the trip offering you would like modify: ");
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Enter the Driver ID of the new driver for this trip offering: ");
         String driverId = scnr.nextLine();
@@ -212,9 +216,9 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         System.out.println("Enter the trip number of the trip offering you would like modify: ");
         int tripNumber = scnr.nextInt();
         scnr.nextLine();
-        System.out.println("Enter the date of the trip offering you would like modify: ");
+        System.out.println("Enter the date (YYYY-MM-DD) of the trip offering you would like modify: ");
         String date = scnr.nextLine();
-        System.out.println("Enter the scheduled start time of the trip offering you would like modify: ");
+        System.out.println("Enter the scheduled start time (hh:mm:ss) of the trip offering you would like modify: ");
         String scheduledStartTime = scnr.nextLine();
         System.out.println("Enter the Bus ID of the new bus for this trip offering: ");
         String busId = scnr.nextLine();

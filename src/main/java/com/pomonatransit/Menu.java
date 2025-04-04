@@ -6,11 +6,14 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Menu {
+    private static String getPassword(){
+        return "1234";
+    }
 
     public static void menu(){
         String url = "jdbc:postgresql://localhost:5432/pomona_transit";
         String user = "postgres";
-        String password = "1234"; 
+        String password = getPassword(); 
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Scanner scnr = new Scanner(System.in);) {

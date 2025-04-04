@@ -105,9 +105,9 @@ public class Driver {
         public static void dispDriverSchedule(Connection conn, Scanner scnr){
             System.out.println("Enter the driver ID for the driver's schedule you would like to view: ");
             String driverId = scnr.nextLine();
-            System.out.println("Enter the start date for the schedule you would like to view: ");
+            System.out.println("Enter the start date (YYYY-MM-DD) for the schedule you would like to view: ");
             String startDate = scnr.nextLine();
-            System.out.println("Enter the end date for the schedule you would like to view: ");
+            System.out.println("Enter the end date (YYYY-MM-DD) for the schedule you would like to view: ");
             String endDate = scnr.nextLine();
 
             dispDriverSchedule(conn, driverId, startDate, endDate);

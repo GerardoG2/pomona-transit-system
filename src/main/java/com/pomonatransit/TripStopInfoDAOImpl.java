@@ -31,17 +31,18 @@ public class TripStopInfoDAOImpl implements TripStopInfoDAO{
             ps.setInt(1, tripNumber);
             
             ResultSet rs = ps.executeQuery();
-            System.out.printf("\n%-8s %-12s %-12s %-12s\n",
-            "Trip #", "Stop #", "Sequence #", "Driving Time");
+            System.out.printf("\n%-8s %-12s %-20s %-12s %-12s\n",
+            "Trip #", "Stop #","Stop Address", "Sequence #", "Driving Time");
             System.out.println("-------------------------------------------------------------");
             while(rs.next()){
 
                 int stopNumber = rs.getInt("stop_number");
+                String stopAddress = rs.getString("stop_address");
                 int sequenceNumber = rs.getInt("sequence_number");
                 String drivingTime = rs.getString("driving_time");
 
-                System.out.printf("%-8d %-12d %-12d %-12s\n",
-                tripNumber, stopNumber, sequenceNumber, drivingTime);
+                System.out.printf("%-8d %-12d %-20s %-12d %-12s\n",
+                tripNumber,  stopNumber, stopAddress, sequenceNumber, drivingTime);
 
             }
             
