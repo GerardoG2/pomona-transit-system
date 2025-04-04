@@ -25,6 +25,14 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
         dispTripOffering(startLocationName, destinationName);
     }
+
+    /**
+     * Displays trip offerings between the given start and destination locations.
+     * Outputs trip number, date, scheduled times, driver ID, and bus ID.
+     *
+     * @param startLocationName Start location to match (case-insensitive)
+     * @param destinationName Destination location to match (case-insensitive)
+     */
     private void dispTripOffering(String startLocationName, String destinationName){
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -56,6 +64,7 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
             e.printStackTrace();
         }
     }
+
     @Override
     public void dispTripOfferingSchedule(){
         try {
@@ -98,7 +107,14 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
 
     }
 
-    
+    /**
+     * Deletes a trip offering based on its trip number, date, and scheduled start time.
+     * If a record is deleted, it refreshes the trip offering schedule.
+     *
+     * @param tripNumber Trip number to delete
+     * @param dateStr Date of the trip in YYYY-MM-DD format
+     * @param scheduledStartTimeStr Scheduled start time of the trip in HH:mm:ss format
+     */
     private void deleteTripOffering(int tripNumber, String dateStr, String scheduledStartTimeStr){
         try{
             Date date = Date.valueOf(dateStr);
@@ -144,6 +160,12 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         addTripOffering(tripOffering);
     }
     
+    /**
+     * Inserts a new trip offering into the database using the provided TripOffering object.
+     * Handles foreign key constraint violations gracefully.
+     *
+     * @param tripOffering Trip offering object containing all required data
+     */
     private void addTripOffering (TripOffering tripOffering){
         int tripNumber = tripOffering.getTripNumber();
         Date date = Date.valueOf(tripOffering.getDate());
@@ -189,7 +211,15 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         updateDriver(tripNumber, date, scheduledStartTime, driverId);
     }
 
-    
+    /**
+     * Updates the driver ID for a specific trip offering.
+     * Trip offering is identified by trip number, date, and scheduled start time.
+     *
+     * @param tripNumber Trip number to modify
+     * @param date Trip date in YYYY-MM-DD format
+     * @param scheduledStartTime Scheduled start time in HH:mm:ss format
+     * @param newDriverID New driver ID to assign
+     */
     private void updateDriver(int tripNumber, String date, String scheduledStartTime, String newDriverID){
         try{
             PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +
@@ -226,7 +256,15 @@ public class TripOfferingDAOImpl implements TripOfferingDAO{
         updateBus(tripNumber, date, scheduledStartTime, busId);
     }
 
-    
+    /**
+     * Updates the bus ID for a specific trip offering.
+     * Trip offering is identified by trip number, date, and scheduled start time.
+     *
+     * @param tripNumber Trip number to modify
+     * @param date Trip date in YYYY-MM-DD format
+     * @param scheduledStartTime Scheduled start time in HH:mm:ss format
+     * @param newBusID New bus ID to assign
+     */
     private void updateBus(int tripNumber, String date, String scheduledStartTime, String newBusID){
         try{
             PreparedStatement ps = conn.prepareStatement("UPDATE trip_offering " +

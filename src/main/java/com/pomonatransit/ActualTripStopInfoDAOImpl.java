@@ -14,6 +14,7 @@ public class ActualTripStopInfoDAOImpl implements ActualTripStopInfoDAO{
         this.conn = conn;
     }
 
+
     @Override
     public void dispActualTripStopInfo(){
         try {
@@ -42,6 +43,7 @@ public class ActualTripStopInfoDAOImpl implements ActualTripStopInfoDAO{
         }
     }
 
+
     @Override
     public void insertActualTripStopInfo(Scanner scnr){
         System.out.println("Enter the following details of the actual trip stop info you would like to insert.\n");
@@ -69,6 +71,12 @@ public class ActualTripStopInfoDAOImpl implements ActualTripStopInfoDAO{
         ActualTripStopInfo actualTripStopInfo = new ActualTripStopInfo(tripNumber, date, scheduledStartTime, stopNumber, scheduledArrivalTime, actualStartTime, numberOfPassengersIn, numberOfPassengersOut);
         insertActualTripStopInfo(actualTripStopInfo);
     }
+
+    /**
+     * Inserts a new actual trip stop info record into the database using the given object.
+     *
+     * @param actualTripStopInfo Object containing all fields required for a trip stop entry
+     */
     private void insertActualTripStopInfo(ActualTripStopInfo actualTripStopInfo){
         int tripNumber = actualTripStopInfo.getTripNumber();
         Date date = Date.valueOf(actualTripStopInfo.getDate());

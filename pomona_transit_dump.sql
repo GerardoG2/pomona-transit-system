@@ -1,6 +1,7 @@
---
+-- 
 -- PostgreSQL database dump
---
+-- run this command in bash terminal to build database: pg_dump -U postgres -d pomona_transit -f pomona_transit_dump.sql
+-- * replace pomona_transit with your database_name
 
 -- Dumped from database version 17.2
 -- Dumped by pg_dump version 17.2

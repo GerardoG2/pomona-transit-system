@@ -18,12 +18,26 @@ public class Driver {
         this.conn = conn;
     }
 
+    /**
+     * Constructs a Driver object with the specified ID, name, and phone number.
+     *
+     * @param driverID Unique identifier for the driver
+     * @param driverNAME Full name of the driver
+     * @param driverPHONE Phone number in the format (###)###-####
+     */
     public Driver(String driverID, String driverNAME, String driverPHONE){
         setDriverId(driverID);
         setDriverName(driverNAME);
         setDriverPhone(driverPHONE);
     }
 
+    /**
+     * Prompts the user to enter a new driver's ID, name, and phone number,
+     * constructs a Driver object, and inserts it into the database.
+     *
+     * @param conn Active database connection
+     * @param scnr Scanner used to capture user input
+     */
     public static void addDriver(Connection conn, Scanner scnr){
         System.out.println("Enter the driver ID of the driver you would like to add: ");
         String driverId = scnr.nextLine();
@@ -37,6 +51,12 @@ public class Driver {
         driver.addDriver(driver);
 
     }
+
+    /**
+     * Inserts the given Driver object into the driver table in the database.
+     *
+     * @param driver The driver to insert
+     */
     private void addDriver(Driver driver){
         String newDriverId = driver.getDriverId();
         String newDriverName = driver.getDriverName();
@@ -55,6 +75,11 @@ public class Driver {
 
     }
 
+    /**
+     * Deletes a driver from the database using the given driver ID.
+     *
+     * @param driverID Unique identifier of the driver to be removed
+     */
     public void deleteDriver(String driverID){
         try{
             PreparedStatement ps = conn.prepareStatement("DELETE FROM driver WHERE driver_id =?");
@@ -79,6 +104,10 @@ public class Driver {
         this.conn = conn;
     }
 
+    /**
+     * Displays all drivers from the driver table in a formatted table.
+     * Each row includes driver ID, name, and phone number.
+     */
     public void dispDrivers(){
         try{
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM driver");
@@ -102,18 +131,34 @@ public class Driver {
         }
     }
 
-        public static void dispDriverSchedule(Connection conn, Scanner scnr){
-            System.out.println("Enter the driver ID for the driver's schedule you would like to view: ");
-            String driverId = scnr.nextLine();
-            System.out.println("Enter the start date (YYYY-MM-DD) for the schedule you would like to view: ");
-            String startDate = scnr.nextLine();
-            System.out.println("Enter the end date (YYYY-MM-DD) for the schedule you would like to view: ");
-            String endDate = scnr.nextLine();
+    /**
+     * Prompts the user to enter a driver ID and a date range, then displays
+     * the driver's trip schedule within that range.
+     *
+     * @param conn Active database connection
+     * @param scnr Scanner used to collect user input
+     */
+    public static void dispDriverSchedule(Connection conn, Scanner scnr){
+        System.out.println("Enter the driver ID for the driver's schedule you would like to view: ");
+        String driverId = scnr.nextLine();
+        System.out.println("Enter the start date (YYYY-MM-DD) for the schedule you would like to view: ");
+        String startDate = scnr.nextLine();
+        System.out.println("Enter the end date (YYYY-MM-DD) for the schedule you would like to view: ");
+        String endDate = scnr.nextLine();
 
-            dispDriverSchedule(conn, driverId, startDate, endDate);
-        }
+        dispDriverSchedule(conn, driverId, startDate, endDate);
+    }
 
-        private static void dispDriverSchedule(Connection conn, String driverId, String startDateStr, String endDateStr){
+        /**
+     * Displays a driver's trip schedule between the specified start and end dates.
+     * Includes trip number, date, start time, arrival time, driver ID, and bus ID.
+     *
+     * @param conn Active database connection
+     * @param driverId ID of the driver whose schedule is to be displayed
+     * @param startDateStr Start date in YYYY-MM-DD format
+     * @param endDateStr End date in YYYY-MM-DD format
+     */
+    private static void dispDriverSchedule(Connection conn, String driverId, String startDateStr, String endDateStr){
         try{
             Date startDate = Date.valueOf(startDateStr);
             Date endDate = Date.valueOf(endDateStr);

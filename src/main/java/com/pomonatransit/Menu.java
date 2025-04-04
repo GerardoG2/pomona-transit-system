@@ -7,7 +7,12 @@ import java.util.Scanner;
 
 public class Menu {
 
-    /** Establishes database connection. */
+    /**
+     * Establishes DB connection and launches CLI.
+     * @param jdbcUrl JDBC connection string, e.g. "jdbc:postgresql://localhost:5432/db"
+     * @param databaseUserName Username for PostgreSQL connection
+     * @param dbPassword Password for PostgreSQL connection
+     */
     public static void menu(String jdbcUrl, String databaseUserName, String dbPassword){
         try (Connection conn = DriverManager.getConnection(jdbcUrl, databaseUserName, dbPassword);
              Scanner scnr = new Scanner(System.in);) {
@@ -36,9 +41,11 @@ public class Menu {
 
     }
 
-    /** Only prints menu options.
-     * Use menu() to interact with menu.
-     * */
+    /**
+     * Displays the interactive menu options for the user interface.
+     * This method does not handle input or logic — it only prints the menu.
+     * Called by the menu() method before capturing user selection.
+     */
     public static void printMenuOptions(){
         System.out.println("\nPlease select an option.");
         System.out.println("-------------------------------------------------------------");
@@ -57,8 +64,13 @@ public class Menu {
         System.out.println("0. EXIT\n");
     }
 
-    /** Helper method for menu().
-     * Executes database access method based off user input.
+    /**
+     * Handles the user's menu selection by invoking the corresponding database operation.
+     * This method delegates each menu option to the appropriate DAO method.
+     *
+     * @param conn Active database connection used by DAOs
+     * @param scnr Scanner for capturing any further user input (if needed)
+     * @param selection User's menu choice as a string (e.g. "0", "1", "2", ..., "12")
      */
     public static void menuSelection(Connection conn, Scanner scnr, String selection){
         TripOfferingDAO tripOfferingDAO;

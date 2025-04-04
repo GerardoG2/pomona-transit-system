@@ -17,13 +17,26 @@ public class Bus {
         this.conn = conn;
     }
 
+    /**
+     * Creates a Bus object with its identifying properties.
+     *
+     * @param busId The bus's unique ID
+     * @param model The bus model name
+     * @param year  The manufacturing year
+     */
     public Bus(String busId, String model, int year){
         setBusId(busId);
         setModel(model);
         setYear(year);
     }
 
-
+    /**
+     * Prompts the user to enter details for a new bus (ID, model, and year),
+     * constructs a Bus object, and inserts it into the database.
+     *
+     * @param conn Active database connection
+     * @param scnr Scanner used to capture user input from the console
+     */
      public static void addBus(Connection conn, Scanner scnr){
         System.out.println("Enter the bus ID of the bus you would like to add: ");
         String busId = scnr.nextLine();
@@ -36,8 +49,13 @@ public class Bus {
         Bus bus = new Bus(busId, model, year);
         bus.setDBConnection(conn);
         bus.addBus(bus);
-
     }   
+
+    /**
+     * Inserts a new bus record into the database using the provided Bus object.
+     *
+     * @param bus The bus object containing ID, model, and year to be inserted.
+     */
     private void addBus(Bus bus){
         String newBusId = bus.getBusId();
         String newBusModel = bus.getModel();
@@ -53,16 +71,27 @@ public class Bus {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Prompts the user for a bus ID and deletes the corresponding record from the database.
+     *
+     * @param conn Active database connection
+     * @param scnr Scanner used to capture user input
+     */
     public static void deleteBus(Connection conn, Scanner scnr){
         System.out.println("Enter the bus ID for the bus you would like to delete:");
         String busId = scnr.nextLine();
-        
+
         deleteBus(conn, busId);
     }
 
+    /**
+     * Deletes a bus record from the database using the specified bus ID.
+     *
+     * @param conn Active database connection
+     * @param busID The unique identifier of the bus to delete
+     */
     private static void deleteBus(Connection conn, String busID){
         try{
             PreparedStatement ps = conn.prepareStatement("DELETE FROM bus WHERE bus_id =?");
@@ -70,7 +99,7 @@ public class Bus {
             ps.execute();
             System.out.println("Successfully removed " + busID + " from bus table.");
         } catch(SQLException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -83,10 +112,19 @@ public class Bus {
     public int getYear(){return this.year; }
     public void setYear(int newYear){this.year = newYear;}
 
+    /**
+     * Sets the active database connection for this bus object.
+     *
+     * @param conn The database connection to assign
+     */
     public void setDBConnection(Connection conn){
         this.conn = conn;
     }
 
+    /**
+     * Displays all buses from the database in a formatted table.
+     * Each row includes bus ID, model, and manufacturing year.
+     */
     public void dispBuses(){
         try{
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM bus");

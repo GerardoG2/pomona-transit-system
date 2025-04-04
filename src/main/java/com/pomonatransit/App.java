@@ -16,7 +16,7 @@ public class App {
     String user_database = scnr.nextLine();
     String jdbcUrl = "jdbc:postgresql://localhost:5432/" + user_database;
 
-    Menu.menu(jdbcUrl, user, password);
+    Menu.menu(jdbcUrl, user, password); // interact with user database
     }
 }
 
